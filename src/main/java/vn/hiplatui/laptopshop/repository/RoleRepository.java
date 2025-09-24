@@ -1,0 +1,16 @@
+package vn.hiplatui.laptopshop.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import vn.hiplatui.laptopshop.domain.Role;
+import vn.hiplatui.laptopshop.domain.User;
+
+@Repository
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Role findByName(String name);
+
+}
