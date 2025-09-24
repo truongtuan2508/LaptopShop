@@ -35,28 +35,48 @@
                                             <h3>Create a user</h3>
                                             <hr />
                                             <form:form method="post" action="/admin/user/create"
-                                                modelAttribute="newUser">
-                                                <div class="mb-3">
+                                                modelAttribute="newUser" class="row">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Email: </label>
                                                     <form:input type="email" class="form-control" path="email" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Password</label>
                                                     <form:input type="password" class="form-control" path="password" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Full Name</label>
                                                     <form:input type="text" class="form-control" path="fullName" />
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Address</label>
-                                                    <form:input type="text" class="form-control" path="address" />
-                                                </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone Number</label>
                                                     <form:input type="text" class="form-control" path="phone" />
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Create</button>
+                                                <div class="mb-3 col-12">
+                                                    <label class="form-label">Address</label>
+                                                    <form:input type="text" class="form-control" path="address" />
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role </label>
+                                                    <select class="form-select">
+                                                        <option value="1">Admin</option>
+                                                        <option value="2">User</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Avatar</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg">
+                                                </div>
+                                                <div class="mb-3 col-12">
+                                                    <img style="max-height: 250px; display: none;" alt="Avatar Preview"
+                                                        id="avatarPreview" />
+                                                </div>
+
+                                                <div class="col-12 mb5">
+                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                </div>
                                             </form:form>
                                         </div>
 
@@ -69,7 +89,7 @@
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>
-                <script src="js/scripts.js"></script>
+                <script src="/js/scripts.js"></script>
 
             </body>
 
