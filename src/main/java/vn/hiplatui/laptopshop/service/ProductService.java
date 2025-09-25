@@ -1,13 +1,14 @@
 package vn.hiplatui.laptopshop.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import vn.hiplatui.laptopshop.domain.Product;
 import vn.hiplatui.laptopshop.repository.ProductRepository;
 
-@Controller
+@Service
 public class ProductService {
     private final ProductRepository productRepository;
 
@@ -23,4 +24,11 @@ public class ProductService {
         return this.productRepository.findAll();
     }
 
+    public Optional<Product> fetchProductById(long id) {
+        return this.productRepository.findById(id);
+    }
+
+    public void deleteProduct(long id) {
+        this.productRepository.deleteById(id);
+    }
 }
