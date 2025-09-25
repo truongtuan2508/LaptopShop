@@ -12,7 +12,7 @@ public class ItemController {
         return "client/product/detail";
     }
 
-    @GetMapping("/product")
+    @GetMapping("/products")
     public String getHomePageTest() {
         return "client/product/detail";
     }
