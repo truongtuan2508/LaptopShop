@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,15 +32,6 @@ public class UserController {
         this.uploadService = uploadService;
         this.passwordEncoder = passwordEncoder;
     }
-
-    // @RequestMapping("/")
-    // public String getHomePage(Model model) {
-    // List<User> arrUsers = this.userService.getAllUsersByEmail("123@gmail.com");
-    // System.out.println(arrUsers);
-    // model.addAttribute("hip", "test");
-    // model.addAttribute("hiplatui", "From controller with model");
-    // return "hello";
-    // }
 
     @RequestMapping("admin/user")
     public String getUserPage(Model model) {

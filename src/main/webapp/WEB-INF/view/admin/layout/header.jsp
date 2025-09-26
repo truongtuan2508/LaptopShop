@@ -11,7 +11,7 @@
                 <span style="color: white;">
                     <div class="text-center my-3">
                         Welcome,
-                        <c:out value="${pageContext.request.userPrincipal.name}" />
+                        ${sessionScope.fullName}
                     </div>
                 </span>
                 <!-- <div class="input-group">
