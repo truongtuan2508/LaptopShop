@@ -1,5 +1,8 @@
 package vn.hiplatui.laptopshop.domain.dto;
 
+import vn.hiplatui.laptopshop.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     private String firstName;
     private String lastName;
