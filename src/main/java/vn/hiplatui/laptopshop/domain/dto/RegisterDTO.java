@@ -1,13 +1,23 @@
 package vn.hiplatui.laptopshop.domain.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 import vn.hiplatui.laptopshop.service.validator.RegisterChecked;
 
 @RegisterChecked
 public class RegisterDTO {
+
+    @Size(min = 3, message = "FirstName at least 3 characters")
     private String firstName;
+
     private String lastName;
+
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
     private String password;
+
+    @Size(min = 3, message = "ConfirmPassword at least 3 characters")
     private String confirmPassword;
 
     public String getFirstName() {
