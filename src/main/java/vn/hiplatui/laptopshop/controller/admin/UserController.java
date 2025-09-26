@@ -34,14 +34,14 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        List<User> arrUsers = this.userService.getAllUsersByEmail("123@gmail.com");
-        System.out.println(arrUsers);
-        model.addAttribute("hip", "test");
-        model.addAttribute("hiplatui", "From controller with model");
-        return "hello";
-    }
+    // @RequestMapping("/")
+    // public String getHomePage(Model model) {
+    // List<User> arrUsers = this.userService.getAllUsersByEmail("123@gmail.com");
+    // System.out.println(arrUsers);
+    // model.addAttribute("hip", "test");
+    // model.addAttribute("hiplatui", "From controller with model");
+    // return "hello";
+    // }
 
     @RequestMapping("admin/user")
     public String getUserPage(Model model) {
