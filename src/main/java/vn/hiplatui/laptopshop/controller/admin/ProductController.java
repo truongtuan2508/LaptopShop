@@ -47,7 +47,7 @@ public class ProductController {
 
         // Validate
         if (newProductBindingResult.hasErrors()) {
-            return "/admin/product/create";
+            return "admin/product/create";
         }
 
         // upload file
