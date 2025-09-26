@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.hiplatui.laptopshop.domain.Product;
 import vn.hiplatui.laptopshop.service.ProductService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ItemController {
@@ -22,6 +23,11 @@ public class ItemController {
         model.addAttribute("product", pr);
         model.addAttribute("id", id);
         return "client/product/detail";
+    }
+
+    @GetMapping("/register")
+    public String getRegisterPage(Model model) {
+        return "client/auth/register";
     }
 
 }
