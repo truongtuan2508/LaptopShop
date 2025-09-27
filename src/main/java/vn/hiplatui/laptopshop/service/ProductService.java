@@ -46,7 +46,7 @@ public class ProductService {
 
     public void handleAddProductToCart(String email, long productId) {
         User user = this.userService.getUserByEmail(email);
-        if (user != null) {
+        if (user == null) {
             // check user da co cart chua? Neu chua => tao. moi
             Cart cart = this.cartRepository.findByUser(user);
             if (cart != null) {
