@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.hiplatui.laptopshop.domain.Product;
 import vn.hiplatui.laptopshop.service.ProductService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class ItemController {
@@ -22,6 +24,12 @@ public class ItemController {
         model.addAttribute("product", pr);
         model.addAttribute("id", id);
         return "client/product/detail";
+    }
+
+    @PostMapping("/add-product-to-cart/{id}")
+    public String addProductToCart(@PathVariable long id) {
+
+        return "redirect:/";
     }
 
 }
