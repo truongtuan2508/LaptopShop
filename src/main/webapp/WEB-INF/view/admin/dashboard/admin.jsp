@@ -30,7 +30,7 @@
                             <div class="row">
                                 <div class="col-xl-4 col-md-6">
                                     <div class="card bg-primary text-white mb-4">
-                                        <div class="card-body">Số lượng user (10)</div>
+                                        <div class="card-body">Số lượng user (${countUsers})</div>
                                         <div class="card-footer d-flex align-items-center justify-content-between">
                                             <a class="small text-white stretched-link" href="/admin/user">View
                                                 Details</a>
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-xl-4 col-md-6">
                                     <div class="card bg-danger text-white mb-4">
-                                        <div class="card-body">Số lượng Product (11)</div>
+                                        <div class="card-body">Số lượng Product (${countProducts})</div>
                                         <div class="card-footer d-flex align-items-center justify-content-between">
                                             <a class="small text-white stretched-link" href="/admin/product">View
                                                 Details</a>
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-xl-4 col-md-6">
                                     <div class="card bg-success text-white mb-4">
-                                        <div class="card-body">Số lượng Order</div>
+                                        <div class="card-body">Số lượng Order (${countOrders})</div>
                                         <div class="card-footer d-flex align-items-center justify-content-between">
                                             <a class="small text-white stretched-link" href="/admin/order">View
                                                 Details</a>
