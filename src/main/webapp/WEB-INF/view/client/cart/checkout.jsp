@@ -263,72 +263,7 @@
                     <!-- Template Javascript -->
                     <script src="/client/js/main.js"></script>
 
-                    <!-- Checkout Quantity Update Script -->
-                    <script>
-                        $(document).ready(function () {
-                            // Handle quantity update buttons
-                            $('.btn-plus').click(function (e) {
-                                e.preventDefault();
-                                var input = $(this).siblings('input');
-                                var currentVal = parseInt(input.val());
-                                input.val(currentVal + 1);
-                                updateCartDetail(input);
-                            });
 
-                            $('.btn-minus').click(function (e) {
-                                e.preventDefault();
-                                var input = $(this).siblings('input');
-                                var currentVal = parseInt(input.val());
-                                if (currentVal > 1) {
-                                    input.val(currentVal - 1);
-                                    updateCartDetail(input);
-                                }
-                            });
-
-                            // Handle direct input change
-                            $('input[data-cart-detail-id]').on('change', function () {
-                                var quantity = parseInt($(this).val());
-                                if (quantity < 1) {
-                                    $(this).val(1);
-                                    quantity = 1;
-                                }
-                                updateCartDetail($(this));
-                            });
-
-                            function updateCartDetail(input) {
-                                var cartDetailId = input.data('cart-detail-id');
-                                var quantity = parseInt(input.val());
-                                var price = parseFloat(input.data('cart-detail-price'));
-
-                                // Update total price for this item
-                                var totalPrice = price * quantity;
-                                $('p[data-cart-detail-id="' + cartDetailId + '"]').text(
-                                    new Intl.NumberFormat('vi-VN').format(totalPrice) + 'đ'
-                                );
-
-                                // Update overall total
-                                updateOverallTotal();
-
-                                // Send update to server
-                                $.post('/update-cart-quantity/' + cartDetailId, {
-                                    quantity: quantity,
-                                    _token: $('input[name="_token"]').val()
-                                });
-                            }
-
-                            function updateOverallTotal() {
-                                var total = 0;
-                                $('p[data-cart-detail-id]').each(function () {
-                                    var priceText = $(this).text().replace('đ', '').replace(/\./g, '');
-                                    total += parseFloat(priceText);
-                                });
-
-                                $('p[data-cart-total-price]').text(
-                                    new Intl.NumberFormat('vi-VN').format(total) + 'đ'
-                                );
-                            }
-                        });
-                    </script>
                 </body>
 
                 </html>
