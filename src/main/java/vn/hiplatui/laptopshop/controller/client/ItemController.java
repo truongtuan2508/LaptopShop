@@ -15,7 +15,6 @@ import vn.hiplatui.laptopshop.domain.Product;
 import vn.hiplatui.laptopshop.domain.User;
 import vn.hiplatui.laptopshop.service.ProductService;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
