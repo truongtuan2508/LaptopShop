@@ -176,7 +176,7 @@
 
                                     <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                        <div style="display: block;">
+                                        <div style="display: none;">
                                             <c:forEach var="cartDetail" items="${cart.cartDetails}" varStatus="status">
                                                 <div class="mb-3">
                                                     <div class="form-group">
@@ -201,7 +201,8 @@
 
                                     <button
                                         class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                        type="button">Xác nhận đặt hàng
+                                        type="button">
+                                        <a href="/checkout">Xác nhận đặt hàng</a>
                                     </button>
                                 </div>
 
