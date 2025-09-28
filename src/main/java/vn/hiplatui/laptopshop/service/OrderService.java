@@ -45,6 +45,7 @@ public class OrderService {
         Optional<Order> orderOptional = this.fetchOrderById(order.getId());
         if (orderOptional.isPresent()) {
             Order currentOrder = orderOptional.get();
+
             currentOrder.setStatus((order.getStatus()));
             this.orderRepository.save(currentOrder);
         }

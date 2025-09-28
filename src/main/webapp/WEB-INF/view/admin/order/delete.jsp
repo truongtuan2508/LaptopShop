@@ -11,7 +11,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                 <meta name="description" content="LaptopShop - Dự án laptopshop" />
                 <meta name="author" content="LaptopShop" />
-                <title>Detele order with ID ${id}</title>
+                <title>Delete order with ID ${id}</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
@@ -33,7 +33,7 @@
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h3>Delete product with ID ${id}</h3>
+                                                <h3>Delete order with ID ${id}</h3>
                                             </div>
                                             <hr />
                                             <div class="alert alert-danger" role="alert">
