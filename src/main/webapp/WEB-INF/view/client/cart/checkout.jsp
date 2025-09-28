@@ -201,8 +201,10 @@
                                                     </p>
                                                 </div>
 
-                                                <!-- <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
-                                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                                <!-- <form:form action="/confirm-checkout" method="post"
+                                                    modelAttribute="cart">
+                                                    <input type="hidden" name="${_csrf.parameterName}"
+                                                        value="${_csrf.token}" />
                                                     <div style="display: block;">
                                                         <c:forEach var="cartDetail" items="${cart.cartDetails}"
                                                             varStatus="status">
