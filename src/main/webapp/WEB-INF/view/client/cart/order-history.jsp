@@ -8,7 +8,7 @@
 
                 <head>
                     <meta charset="utf-8">
-                    <title>${product.name} - LaptopShop</title>
+                    <title>Order History - LaptopShop</title>
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
                     <meta content="" name="keywords">
                     <meta content="" name="description">
@@ -75,7 +75,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:if test="${ emty orders}">
+                                        <c:if test="${empty orders}">
                                             <tr>
                                                 <td colspan="6">
                                                     Không có đơn hàng nào được tạo.
@@ -89,32 +89,33 @@
                                             <tr>
                                                 <td colspan="2">Order ID = ${order.id}</td>
                                                 <td colspan="1">
-                                                    <fmt:formatNumber type="number" value=" ${order.totalPrice}" /> đ
+                                                    <fmt:formatNumber type="number" value="${order.totalPrice}" /> đ
                                                 </td>
                                                 <td colspan="2"></td>
                                                 <td colspan="1">
                                                     ${order.status}
                                                 </td>
                                             </tr>
-                                            <c:forEach var="orderDetail" items="${order.orderDetails}">
+                                            <c:forEach var="orderDetail" items="${order.orderDetails}"
+                                                varStatus="detailStatus">
                                                 <tr>
                                                     <th scope="row">
                                                         <div class="d-flex align-items-center">
-                                                            <img src="images/product/${cartDetail.product.image}"
+                                                            <img src="/images/product/${orderDetail.product.image}"
                                                                 class="img-fluid me-5 rounded-circle"
                                                                 style="width: 80px; height: 80px;" alt="">
                                                         </div>
                                                     </th>
                                                     <td>
                                                         <p class="mb-0 mt-4">
-                                                            <a href="/product/${cartDetail.product.id}"
-                                                                target="_blank">${cartDetail.product.name}</a>
+                                                            <a href="/product/${orderDetail.product.id}"
+                                                                target="_blank">${orderDetail.product.name}</a>
                                                         </p>
                                                     </td>
                                                     <td>
                                                         <p class="mb-0 mt-4">
                                                             <fmt:formatNumber type="number"
-                                                                value="${cartDetail.product.price}" />
+                                                                value="${orderDetail.product.price}" />
                                                             đ
                                                         </p>
                                                     </td>
@@ -128,10 +129,10 @@
                                                             </div>
                                                             <input type="text"
                                                                 class="form-control form-control-sm text-center border-0"
-                                                                value="${cartDetail.quantity}"
-                                                                data-cart-detail-id="${cartDetail.id}"
-                                                                data-cart-detail-price="${cartDetail.price}"
-                                                                data-cart-detail-index="${status.index}">
+                                                                value="${orderDetail.quantity}"
+                                                                data-cart-detail-id="${orderDetail.id}"
+                                                                data-cart-detail-price="${orderDetail.price}"
+                                                                data-cart-detail-index="${detailStatus.index}">
 
                                                             <div class="input-group-btn">
                                                                 <button
@@ -142,9 +143,9 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="mb-0 mt-4" data-cart-detail-id="${cartDetail.id}">
+                                                        <p class="mb-0 mt-4" data-cart-detail-id="${orderDetail.id}">
                                                             <fmt:formatNumber type="number"
-                                                                value="${cartDetail.price * cartDetail.quantity}" />
+                                                                value="${orderDetail.price * orderDetail.quantity}" />
                                                             đ
                                                         </p>
                                                     </td>
@@ -163,65 +164,7 @@
                                 </table>
                             </div>
 
-                            <div class="mt-5 row g-4 justify-content-start">
-                                <div class="col-12 col-md-8"></div>
-                                <div class="bg-light rounded">
-                                    <div class="p-4">
-                                        <h1 class="display-6 mb-4">Thông tin <span class="fw-normal">đơn hàng</span>
-                                        </h1>
-                                        <div class="d-flex justify-content-between mb-4">
-                                            <h5 class="mb-0 me-4">Tạm tính :</h5>
-                                            <p class="mb-0" data-cart-total-price="${totalPrice}">
-                                                <fmt:formatNumber type="number" value="${totalPrice}" />đ
-                                            </p>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <h5 class="mb-0 me-4">Phí vận chuyển: </h5>
-                                            <div class="">
-                                                <p class="mb-0">0đ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                                        <h5 class="mb-0 ps-4 me-4">Tổng số tiền: </h5>
-                                        <p class="mb-0 pe-4" data-cart-total-price="${totalPrice}">
-                                            <fmt:formatNumber type="number" value="${totalPrice}" />đ
-                                        </p>
-                                    </div>
 
-                                    <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                        <div style="display: none;">
-                                            <c:forEach var="cartDetail" items="${cart.cartDetails}" varStatus="status">
-                                                <div class="mb-3">
-                                                    <div class="form-group">
-                                                        <label>ID: </label>
-                                                        <form:input class="form-control" type="text"
-                                                            value="${cartDetail.id}"
-                                                            path="cartDetails[${status.index}].id" />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Quantity: </label>
-                                                        <form:input class="form-control" type="text"
-                                                            value="${cartDetail.quantity}"
-                                                            path="cartDetails[${status.index}].quantity" />
-                                                    </div>
-                                                </div>
-                                            </c:forEach>
-
-                                        </div>
-
-                                    </form:form>
-
-
-                                    <button
-                                        class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                        type="submit">
-                                        <a href="/checkout">Xác nhận đặt hàng</a>
-                                    </button>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                     <!-- Cart Page End -->
