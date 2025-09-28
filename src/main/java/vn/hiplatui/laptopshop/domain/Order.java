@@ -86,9 +86,12 @@ public class Order {
         return "Order [id=" + id + ", totalPrice=" + totalPrice + "]";
     }
 
-    public void setUser(User user2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setUser'");
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }
