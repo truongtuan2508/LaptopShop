@@ -256,6 +256,7 @@
         //sort order
         let sortValue = $("input[name='radio-sort']:checked").val();
         const currentUrl = new URL(window.location.href);
+        const searchParams = currentUrl.searchParams;
 
         //Add or update query params
         searchParams.set('page', "1");
