@@ -94,10 +94,9 @@
                                                         <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
                                                             href="/admin/product?page=${currentPage + 1}"
                                                             aria-label="Next">
-                                                            <span aria-hidden="true">&laquo;</span>
+                                                            <span aria-hidden="true">&raquo;</span>
                                                         </a>
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                        </a>
+
                                                     </li>
                                                 </ul>
                                             </nav>

@@ -48,7 +48,8 @@ public class ProductController {
         Pageable pageable = PageRequest.of(page - 1, 2);
         Page<Product> prs = this.productService.fetchProducts(pageable);
         List<Product> listProducts = prs.getContent();
-        model.addAttribute("products", prs);
+
+        model.addAttribute("products", listProducts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", prs.getTotalPages());
 
