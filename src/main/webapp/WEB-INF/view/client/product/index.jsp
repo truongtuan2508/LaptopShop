@@ -248,7 +248,8 @@
 
                                                 <div class="pagination d-flex justify-content-center mt-5">
                                                     <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                                        <a class="page-link" href="/products?page=${currentPage - 1}"
+                                                        <a class="page-link"
+                                                            href="/products?page=${currentPage - 1}${queryString}"
                                                             aria-label="Previous"
                                                             tabindex="${currentPage == 1 ? '-1' : '0'}"
                                                             aria-disabled="${currentPage == 1}">
@@ -257,14 +258,16 @@
                                                     </li>
                                                     <c:forEach begin="1" end="${totalPages}" var="i">
                                                         <li class="page-item ${i == currentPage ? 'active' : ''}">
-                                                            <a class="page-link" href="/products?page=${i}">
+                                                            <a class="page-link"
+                                                                href="/products?page=${i}${queryString}">
                                                                 ${i}
                                                             </a>
                                                         </li>
                                                     </c:forEach>
                                                     <li
                                                         class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                                        <a class="page-link" href="/products?page=${currentPage + 1}"
+                                                        <a class="page-link"
+                                                            href="/products?page=${currentPage + 1}${queryString}"
                                                             aria-label="Next"
                                                             tabindex="${currentPage == totalPages ? '-1' : '0'}"
                                                             aria-disabled="${currentPage == totalPages}">

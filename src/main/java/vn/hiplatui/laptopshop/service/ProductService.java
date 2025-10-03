@@ -60,6 +60,7 @@ public class ProductService {
         }
 
         Specification<Product> combinedSpec = Specification.where(null);
+
         if (productCriteriaDTO.getTarget() != null && productCriteriaDTO.getTarget().isPresent()) {
             Specification<Product> currentSpecs = ProductSpecs.matchListTarget(productCriteriaDTO.getTarget().get());
             combinedSpec = combinedSpec.and(currentSpecs);
@@ -112,8 +113,7 @@ public class ProductService {
     // }
 
     public Specification<Product> buildPriceSpecification(List<String> price) {
-        Specification<Product> combinedSpec = (root, query, criteriaBuilder) -> criteriaBuilder.disjunction();
-        int count = 0;
+        Specification<Product> combinedSpec = Specification.where(null);
         for (String p : price) {
             double min = 0;
             double max = 0;

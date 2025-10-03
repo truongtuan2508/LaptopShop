@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import vn.hiplatui.laptopshop.domain.Cart;
 import vn.hiplatui.laptopshop.domain.CartDetail;
 import vn.hiplatui.laptopshop.domain.Order;
 import vn.hiplatui.laptopshop.domain.Product;
+import vn.hiplatui.laptopshop.domain.Product_;
 import vn.hiplatui.laptopshop.domain.User;
 import vn.hiplatui.laptopshop.domain.dto.ProductCriteriaDTO;
 import vn.hiplatui.laptopshop.service.ProductService;
@@ -151,7 +153,8 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO) {
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO,
+            HttpServletRequest request) {
 
         int page = 1;
         try {
@@ -164,16 +167,35 @@ public class ItemController {
         } catch (Exception e) {
             // page = 1;
         }
+        // Check sort price
+        Pageable pageable = PageRequest.of(page - 1, 3);
 
-        Pageable pageable = PageRequest.of(page - 1, 5);
+        if (productCriteriaDTO.getSort() != null && productCriteriaDTO.getSort().isPresent()) {
+            String sort = productCriteriaDTO.getSort().get();
+            if (sort.equals("gia-tang-dan")) {
+                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).ascending());
+            } else if (sort.equals("gia-giam-dan")) {
+                pageable = PageRequest.of(page - 1, 3, Sort.by(Product_.PRICE).descending());
+                productCriteriaDTO.setSort(Optional.of("desc"));
+            }
+
+        }
 
         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
 
         List<Product> listProducts = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<Product>();
 
+        String qs = request.getQueryString();
+        if (qs != null && !qs.isBlank()) {
+            // Remove page from query string
+            qs = qs.replace("page=" + page, "");
+        }
+
         model.addAttribute("products", listProducts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", prs.getTotalPages());
+        model.addAttribute("queryString", qs);
+
         return "client/product/index";
     }
 
