@@ -1,6 +1,7 @@
 package vn.hiplatui.laptopshop.controller.client;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,12 +43,25 @@ public class HomePageController {
     }
 
     @GetMapping("/")
-    public String getHomePage(Model model) {
-        // List<Product> products = this.productService.fetchProducts();
-        Pageable pageable = PageRequest.of(0, 10);
+    public String getHomePage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                // Convert String to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page = 1;
+            }
+        } catch (Exception e) {
+            // page = 1;
+        }
+        Pageable pageable = PageRequest.of(page - 1, 5);
         Page<Product> prs = this.productService.fetchProducts(pageable);
-        List<Product> products = prs.getContent();
-        model.addAttribute("products", products);
+        List<Product> listProducts = prs.getContent();
+
+        model.addAttribute("products", listProducts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", prs.getTotalPages());
         return "client/homepage/index";
     }
 
