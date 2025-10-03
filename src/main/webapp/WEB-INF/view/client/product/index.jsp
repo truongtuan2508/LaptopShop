@@ -241,23 +241,26 @@
                                             </c:forEach>
 
                                             <div class="pagination d-flex justify-content-center mt-5">
-                                                <li class="page-item">
-                                                    <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                        href="/products?page=${currentPage - 1}" aria-label="Previous">
+                                                <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                                    <a class="page-link" href="/products?page=${currentPage - 1}"
+                                                        aria-label="Previous"
+                                                        tabindex="${currentPage == 1 ? '-1' : '0'}"
+                                                        aria-disabled="${currentPage == 1}">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                                <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
-                                                    <li class="page-item">
-                                                        <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                            href="/products?page=${loop.index + 1}">
-                                                            ${loop.index + 1}
+                                                <c:forEach begin="1" end="${totalPages}" var="i">
+                                                    <li class="page-item ${i == currentPage ? 'active' : ''}">
+                                                        <a class="page-link" href="/products?page=${i}">
+                                                            ${i}
                                                         </a>
                                                     </li>
                                                 </c:forEach>
-                                                <li class="page-item">
-                                                    <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                        href="/products?page=${currentPage + 1}" aria-label="Next">
+                                                <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                                    <a class="page-link" href="/products?page=${currentPage + 1}"
+                                                        aria-label="Next"
+                                                        tabindex="${currentPage == totalPages ? '-1' : '0'}"
+                                                        aria-disabled="${currentPage == totalPages}">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
