@@ -19,6 +19,7 @@ import vn.hiplatui.laptopshop.domain.CartDetail;
 import vn.hiplatui.laptopshop.domain.Order;
 import vn.hiplatui.laptopshop.domain.Product;
 import vn.hiplatui.laptopshop.domain.User;
+import vn.hiplatui.laptopshop.domain.dto.ProductCriteriaDTO;
 import vn.hiplatui.laptopshop.service.ProductService;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -150,19 +151,13 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model,
-            @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("min-price") Optional<String> minOptional,
-            @RequestParam("max-price") Optional<String> maxOptional,
-            @RequestParam("factory") Optional<String> factoryOptional,
-            @RequestParam("price") Optional<String> priceOptional,
-            @RequestParam("sort") Optional<String> sortOptional) {
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO) {
+
         int page = 1;
         try {
-            if (pageOptional.isPresent()) {
+            if (productCriteriaDTO.getPage().isPresent()) {
                 // Convert String to int
-                page = Integer.parseInt(pageOptional.get());
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
             } else {
                 // page = 1;
             }
@@ -172,20 +167,9 @@ public class ItemController {
 
         Pageable pageable = PageRequest.of(page - 1, 5);
 
-        String name = nameOptional.isPresent() ? nameOptional.get() : "";
-        // double minPrice = minOptional.isPresent() ?
-        // Double.parseDouble(minOptional.get()) : 0;
-        // double maxPrice = maxOptional.isPresent() ?
-        // Double.parseDouble(maxOptional.get()) : 0;
-        // // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
-        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
-        // String price = priceOptional.isPresent() ? priceOptional.get() : "";
+        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, productCriteriaDTO);
 
-        // List<String> price = Arrays.asList(priceOptional.get().split(","));
-
-        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, name);
-
-        List<Product> listProducts = prs.getContent();
+        List<Product> listProducts = prs.getContent().size() > 0 ? prs.getContent() : new ArrayList<Product>();
 
         model.addAttribute("products", listProducts);
         model.addAttribute("currentPage", page);
